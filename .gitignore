@@ -1,0 +1,15 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+/test/tests.*
+/test/coverage.*
+
+*.out
+
+/bin/
+
+vendor/
