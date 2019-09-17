@@ -4,11 +4,13 @@ Very basic DNS server that resolves AWS's EC2 internal FQDNs (ex: `ip-192-0-2-1.
 
 Includes an optional subcommand that sets up macOS to automatically direct all "*.internal" queries to this daemon.
 
+
 ## Requirements
 
 - Go 1.13 or later to build.
 
 NOTE: Only macOS is currently supported.
+
 
 ## Installation
 
@@ -16,7 +18,7 @@ NOTE: Only macOS is currently supported.
 2. Run: `sudo awsresolver setup` (installs `/etc/resolver/internal`)
 3. Run: `brew services start awsresolver`
 
-### Confirming it's working
+### Confirm it's working
 
 This hooks into macOS's resolver. That means things like `ping` and `ssh` will do what you expect, but `dig` will not.
 
@@ -31,7 +33,8 @@ Request timeout for icmp_seq 0
 Request timeout for icmp_seq 1
 ```
 
-## How does it work?
+
+## How it works
 
 This tool listens for `A` record requests ending in `.internal`, extracts the IP from the requested name, and returns it as a response. It binds to UDP and TCP `127.0.0.1:1053`.
 
@@ -41,6 +44,7 @@ Note that the resolver(5) config only applies to DNS resolution performed throug
 
 To query with dig, point it directly at the resolver like so: `dig @127.0.0.1 -p 1053 ip-192-0-2-1.us-west-2.compute.internal`
 
+
 ## Building
 
 To build from source, simply run these commands from inside this repo:
@@ -49,6 +53,15 @@ To build from source, simply run these commands from inside this repo:
     make
 
 The compiled binary is here: `bin/awsresolver`
+
+
+## Uninstalling
+
+To uninstall:
+
+1. Run: `sudo rm -f /etc/resolver/internal`
+2. Run: `brew uninstall awsresolver`
+
 
 ## Author
 
