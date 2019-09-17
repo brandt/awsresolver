@@ -18,6 +18,10 @@ NOTE: Only macOS is currently supported.
 2. Run: `sudo awsresolver setup` (installs `/etc/resolver/internal`)
 3. Run: `brew services start awsresolver`
 
+After doing that, awsresolver will automatically start when you login.
+
+If you just want to run it temporarily, instead start it with: `awsresolver run`. It will stay running in the foreground.
+
 ### Confirm it's working
 
 This hooks into macOS's resolver. That means things like `ping` and `ssh` will do what you expect, but `dig` will not.

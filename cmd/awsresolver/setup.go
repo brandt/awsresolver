@@ -52,6 +52,7 @@ func setupMacOSResolverConfig() error {
 	if err != nil {
 		return errors.Wrap(err, "could not write macOS resolver config")
 	}
+	fmt.Printf("Wrote: %s\n", macOSResolverFilePath)
 	return nil
 }
 
@@ -83,9 +84,8 @@ var setupCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		// TODO: Add daemon setup.
-
-		fmt.Println("Setup complete. You may now start with: `awsresolver run`")
+		fmt.Println("Setup complete. You may now start awsresolver.")
+		fmt.Println("If installed with brew, run:\n\n\tbrew services start awsresolver")
 		os.Exit(0)
 	},
 }
