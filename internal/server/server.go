@@ -25,7 +25,7 @@ func Start() {
 
 	// UDP listener
 	go func() {
-		srv := &dns.Server{Addr: "127.0.0.1:1053", Net: "udp", ReusePort: true}
+		srv := &dns.Server{Addr: "127.0.0.1:1053", Net: "udp"}
 		err := srv.ListenAndServe()
 		if err != nil {
 			log.Fatalf("Failed to set udp listener %s", err.Error())
@@ -34,7 +34,7 @@ func Start() {
 
 	// TCP listener
 	go func() {
-		srv := &dns.Server{Addr: "127.0.0.1:1053", Net: "tcp", ReusePort: true}
+		srv := &dns.Server{Addr: "127.0.0.1:1053", Net: "tcp"}
 		err := srv.ListenAndServe()
 		if err != nil {
 			log.Fatalf("Failed to set tcp listener %s", err.Error())
