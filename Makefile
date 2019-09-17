@@ -4,6 +4,8 @@ VERSION ?= $(shell git describe --tags --always --dirty --match=v* 2> /dev/null 
 PKGS     = $(or $(PKG),$(shell env GO111MODULE=on $(GO) list ./...))
 TESTPKGS = $(shell env GO111MODULE=on $(GO) list -f '{{ if or .TestGoFiles .XTestGoFiles }}{{ .ImportPath }}{{ end }}' $(PKGS))
 BIN      = $(CURDIR)/bin
+MAIN_BIN = $(BIN)/$(notdir $(MODULE))
+SRCS     = $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
 GO      = go
 TIMEOUT = 15
@@ -14,13 +16,16 @@ M = $(shell printf "\033[34;1m▶\033[0m")
 export GO111MODULE=on
 
 .PHONY: all
-all: fmt lint | $(BIN) ; $(info $(M) building executable…) @ ## Build program binary
+all: fmt lint bin
+
+.PHONY: bin
+bin: $(MAIN_BIN)
+
+$(MAIN_BIN): | $(BIN) ; $(info $(M) building executable…) @ ## Build program binary
 	$Q $(GO) build \
 		-tags release \
 		-ldflags '-X $(MODULE)/main.Version=$(VERSION) -X $(MODULE)/main.BuildDate=$(DATE)' \
 		-o $(BIN)/$(notdir $(MODULE)) ./cmd/$(notdir $(MODULE))
-
-# Tools
 
 $(BIN):
 	@mkdir -p $@
