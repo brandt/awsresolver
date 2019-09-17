@@ -22,7 +22,7 @@ var runCmd = &cobra.Command{
 	Long:  `Run the DNS resolver server in the foreground.`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		if runtime.GOOS != "darwin" {
-			fmt.Println("warning: limited support for operating systems other than macOS")
+			fmt.Println("warning: on non-macOS systems '.internal' queries are not auto-routed to awsresolver -- you must query 127.0.0.1:1053 explicitly")
 			return
 		}
 
