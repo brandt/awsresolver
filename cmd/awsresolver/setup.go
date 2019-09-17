@@ -15,6 +15,7 @@ const macOSResolverFilePath = "/etc/resolver/internal"
 const macOSResolverConfig = `domain internal
 nameserver 127.0.0.1
 port 1053
+timeout 1
 search_order 1
 `
 
