@@ -73,9 +73,6 @@ func parseInternalDomainQuery(q dns.Question) net.IP {
 }
 
 func handleRequest(w dns.ResponseWriter, r *dns.Msg) {
-	// We set a relatively short TTL even though the encoded IPs will never
-	// change in case we happen to catch a non-EC2 internal address. Also,
-	// it's not like this is hard for us to compute.
 	ttl := uint32(0)
 
 	q := r.Question[0]
