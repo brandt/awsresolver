@@ -1,6 +1,8 @@
 # awsresolver
 
-Resolves AWS internal IPs like `ip-10-78-32-168.us-east-2.compute.internal`.
+Very basic DNS server that resolves AWS's EC2 internal FQDNs (ex: `ip-192-0-2-1.us-west-2.compute.internal`) by extracting the IP out of the hostname.
+
+Includes an optional subcommand that sets up macOS to automatically direct all "*.internal" queries to this daemon.
 
 ## Requirements
 
@@ -23,7 +25,7 @@ To confirm it's working, run: `ping ip-192-0-2-1.us-west-2.compute.internal`
 If `awsresolver` is correctly setup, you will see ping attempt to reach `192.0.2.1`:
 
 ```
-# SUCCESS
+# SUCCESS                                     vvvvvvvvv
 PING ip-192-0-2-1.us-west-2.compute.internal (192.0.2.1): 56 data bytes
 Request timeout for icmp_seq 0
 Request timeout for icmp_seq 1
